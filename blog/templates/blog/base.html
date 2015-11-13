@@ -1,0 +1,220 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tenkiamemma</title>
+        <link rel="stylesheet" href="{% static 'blog/css/bootstrap.min.css' %}" />
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,700,300italic' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,700italic,300italic,300,400italic,600,600italic,800,800italic' rel='stylesheet' type='text/css'>
+        <style>
+            body {
+                font-family: 'Open Sans', sans-serif;
+                font-weight: 300;
+            }
+            /*****************/
+            /* START SIDEBAR */
+            /*****************/
+            .left-sidebar {
+                background: url("{% static 'blog/img/jurinajurina.jpg' %}");
+                text-align: center;
+            }
+            .l-s-title {
+                padding: 10px 20px;
+                background: rgba(0, 0, 0, .5);
+                color: white;
+                font-family: 'Open Sans Condensed';
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                font-size: 3em;
+            }
+            
+            @media only screen and (min-width:992px) {
+                .left-sidebar {
+                    height: 100%;
+                    background-size: cover;
+                    position: fixed;
+                }
+                .l-s-title {
+                    top: 45%;
+                    left: 5%;
+                    position: fixed;
+                }
+                .admin-panel {
+                    top: 65%;
+                    left: 5.3%;
+                    position: fixed;
+                }
+                .search {
+                    margin-right: 50px;
+                }
+            }
+            @media only screen and (max-width:991px) {
+                .left-sidebar {
+                    background: url("{% static 'blog/img/jurinajurina.jpg' %}");
+                    padding: 75px;
+                    background-position: 50% 75%;
+                    background-size: cover;
+                }
+                .admin-panel {
+                    display: inline-block;
+                }
+                .admin-panel a {
+                    margin: 5px;
+                }
+            }
+            /***************/
+            /* END SIDEBAR */
+            /*  START NAV  */
+            /***************/
+            .navigation {
+                font-size: 1.2em;
+                margin-top: 20px;
+                padding: 10px;
+                font-family: 'Open Sans Condensed';
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                color: #ccc;
+            }
+            .navi-item {
+                padding: 15px 10px;
+                margin: 5px 10px;
+                color: #619ACF;
+            }
+            .navi-item:hover {
+                background-color: #fafafa;
+                text-decoration: none;
+            }
+            .active {
+                background-color: #619ACF;
+                color: white;
+            }
+            .active:hover {
+                background: #4983BA;
+                color: white;
+            }
+            .admin-panel {
+                border-radius: 10px;
+                padding: 15px;
+                background: rgba(255, 255, 255, .7);
+            }
+            .admin-tool {
+                padding: 0 10px;
+                color: #4E514B;
+            }
+            .search:hover {
+                text-decoration: none;
+            }
+            /*******************/
+            /*     END NAV     */
+            /*  START CONTENT  */
+            /*******************/
+            .content {
+                padding: 30px;
+            } .o {
+                font-family: 'Open Sans Condensed';
+                letter-spacing: 2px;
+                text-transform: uppercase;
+            }
+            /*******************/
+            /*   END CONTENT   */
+            /*  START ARTICLE  */
+            /*******************/
+            article {
+                padding: 20px;
+                margin: 20px 20px 30px 20px;
+                border: 1px solid #eee;
+            }
+            article p {
+                font-size: 1.2em;
+            }
+            a.article-heading {
+                font-size: 2em;
+                color: black;
+            }
+            a.article-heading:hover {
+                text-decoration: none;
+                cursor: pointer;
+            }
+            .article-info {
+                font-size: 1.3em;
+                position: relative;
+                top: -3px;
+            }
+            .article-image img {
+                width: 100%;
+            }
+            a.publish-button {
+                background: #619ACF;
+                color: white;
+                font-size: 1.3em;
+                color: white;
+                padding: 3px 0px;
+                display: block;
+                margin:  0 auto;
+                text-align: center;
+                width: 100%;
+            }
+            a.publish-button:hover {
+                background: #4983BA;
+                text-decoration: none;
+            }
+            /*******************/
+            /*   END CONTENT   */
+            /*  START COMMENT  */
+            /*******************/
+            .comment-form input, textarea {
+                border: 1px solid #eee;
+                background: none;
+                font-family: 'Open Sans', sans-serif;
+                padding: 5px;
+                margin: 2px;
+                border-radius: 3px;
+                width: 100%;
+                background: white;
+            }
+            textarea {
+                height: 100px;
+            }
+            .comment-form input:focus, textarea:focus {
+                outline: none;
+                box-shadow: 0px 0px 13px -6px rgba(143,197,255,1);
+                    -webkit-box-shadow: 0px 0px 13px -6px rgba(143,197,255,1);
+                    -moz-box-shadow: 0px 0px 13px -6px rgba(143,197,255,1);
+            }
+            .comment-zone {
+                background: rgba(151, 171, 159, .4);
+            }
+            .reply {
+                margin-left: 2%;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="col-md-4 left-sidebar">
+            <span class="l-s-title" onclick="location.href='{% url "index" %}';">Tenkiamemma</span><br><br>
+            <span class="admin-panel">
+                [
+                <a class="admin-tool" href="{% url 'admin:index' %}"><i class="glyphicon glyphicon-home"></i></a>
+                <a class="admin-tool" href="{% url 'new_post' %}"><i class="glyphicon glyphicon-plus"></i></a>
+                <a class="admin-tool" href="{% url 'drafts' %}"><i class="glyphicon glyphicon-file"></i></a>
+                ]
+                <a class="admin-tool"><i class="glyphicon glyphicon-search"></i></a>
+                <a class="admin-tool"><i class="glyphicon glyphicon-cog"></i></a>
+                <a class="admin-tool"><i class="glyphicon glyphicon-off"></i></a>
+            </span>
+        </div><!-- End Left Sidebar -->
+        <div class="col-md-8 col-md-push-4">
+            <div class="row navigation">
+                <a class="navi-item active" href="{% url 'index' %}">Home</a>
+                <a class="navi-item">Menu 1</a>
+                <a class="navi-item">Menu 2</a>
+                <a class="navi-item">Menu 3</a>
+                <a class="search" style="float:right;">Search <i class="glyphicon glyphicon-search"></i></a>
+            </div><!-- End Navigation -->
+            <div class="row content">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div><!-- End Col-8 -->
+    </body>
+</html>

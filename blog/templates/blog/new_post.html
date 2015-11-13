@@ -1,0 +1,13 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<article class="comment-zone">
+    <form method="POST" class="comment-form">
+        {% csrf_token %}
+        <span class="o">
+        {{ form.as_p }}
+        </span>
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+</article>
+{% endblock %}

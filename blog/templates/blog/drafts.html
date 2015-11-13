@@ -1,0 +1,23 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    {% for post in posts %}
+        <article>
+            <div class="row">
+                <div class="col-sm-2 article-image">
+                    <img src="{{ post.thumb }}"><br>
+                    <a class="publish-button o" href="{% url "publish" pk=post.pk %}">
+                        Publish?
+                    </a>
+                </div>
+                <div class="col-sm-8">
+                    <a class="article-heading o" href="{% url "post_detail" pk=post.pk %}">{{ post.title }}</a>
+                    <span class="article-info o">
+                        {{ post.created_date }}
+                    </span>
+                    <p>{{ post.text|linebreaks|truncatechars:300 }}</p>
+                </div>
+            </div>
+        </article>
+    {% endfor %}
+{% endblock %}

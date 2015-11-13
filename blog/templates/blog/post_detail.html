@@ -1,0 +1,31 @@
+{% extends 'blog/base.html' %}
+{% load ordering %}
+
+{% block content %}
+
+<a class="article-heading o" href="">{{ post.title }}</a>
+<span class="article-info o">
+    {{ post.published_date }}
+</span>
+<p>{{ post.text|linebreaks }}</p>
+
+<article class="comment-zone">
+    <form method="POST" class="comment-form">
+        {% csrf_token %}
+        <span class="o">
+        {{ form.as_p }}
+        </span>
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+</article>
+    
+{% for comment in post.comments.all|order_by:"-created_date" %}
+    <article>
+        <strong>{{ comment.author }}</strong> on {{ comment.created_date }}
+        <p>{{ comment.text|linebreaks }}</p>
+    </article>
+{% empty %}
+    <p>No comments here yet :(</p>
+{% endfor %}
+
+{% endblock %}

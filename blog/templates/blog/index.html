@@ -1,0 +1,25 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    {% for post in posts %}
+        <article onclick="location.href='{% url "post_detail" pk=post.pk %}';">
+            <div class="row">
+                <div class="col-sm-2 article-image">
+                    <img src="{{ post.thumb }}">
+                </div>
+                <div class="col-sm-10">
+                    <a class="article-heading o" href="{% url "post_detail" pk=post.pk %}">{{ post.title }}</a>
+                    <span class="article-info o">
+                        {{ post.published_date }}
+                    </span>
+                    <p>{{ post.text|linebreaks|truncatechars:300 }}</p>
+                    {% if post.comments.count == 1 %}
+                        <a href="{% url 'blog.views.post_detail' pk=post.pk %}#comments" class="post-comments">{{ post.comments.count }} Comment</a>
+                    {% else %}
+                        <a href="{% url 'blog.views.post_detail' pk=post.pk %}#comments" class="post-comments">{{ post.comments.count }} Comments</a>
+                    {% endif %}
+                </div>
+            </div>
+        </article>
+    {% endfor %}
+{% endblock %}
